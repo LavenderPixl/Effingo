@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var playerId: int = 1
 @export var speed = 300
-@export var gravity = 8
+@export var gravity = 400
 @export var isRight : bool = true
 
 var screen_size
@@ -12,13 +12,14 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.flip_h = isRight
-func _process(delta):
-	var intellisense: AnimatedSprite2D = $AnimatedSprite2D
 	
+func _process(delta):	
 	var input_prefix = "pl" + str(playerId) + "_"
 	
 	if not is_on_floor():
-		velocity.y += gravity
+		velocity.y += (gravity * delta) * 2
+		#velocity.y += (500 * delta) * 1.5
+	
 	if is_on_floor() and velocity.x == 0:
 		$AnimatedSprite2D.play("idle")
 	
@@ -37,12 +38,10 @@ func _process(delta):
 		$AnimatedSprite2D.flip_h = false
 	
 	if Input.is_action_just_pressed(input_prefix + "jump") and is_on_floor():
-		velocity.y -= 500
+		velocity.y -= 400
 		$AnimatedSprite2D.play("jump")
 	
 	if velocity.y > 0 and $AnimatedSprite2D.animation != "fall":
-		velocity.y += (500 * delta) * 1.5
 		$AnimatedSprite2D.play("fall")
-	#print("Animation: %s Velocity: %s. Frame: %s" % [$AnimatedSprite2D.animation, velocity.y, $AnimatedSprite2D.is_playing()])
 	
 	move_and_slide()

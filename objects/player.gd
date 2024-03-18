@@ -12,7 +12,6 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	score = 0
-	#$Player.Gravity = gravity 
 	screen_size = get_viewport_rect().size
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.flip_h = isRight

@@ -11,8 +11,7 @@ func _ready():
 
 func _process(delta):
 	if shine_cooldown == 0:
-		#$AnimatedSprite2D.play("idle")
-		if randi_range(0, 4000) == 382:
+		if randi_range(0, 5000) == 382:
 			$AnimatedSprite2D.play("shine")
 			shine_cooldown = 1
 	else:
@@ -20,9 +19,6 @@ func _process(delta):
 			shine_cooldown -= delta
 		else:
 			shine_cooldown = 0
-			
-	#if not shining:
-		#_shine_anim()
 
 func _on_body_entered(body):
 	if body.is_in_group("Players"):
@@ -39,9 +35,3 @@ func _shine_anim():
 	await (get_tree().create_timer(20)).timeout
 	$AnimatedSprite2D.play("idle")
 	print("Not shining anymore")
-	#_on_animated_sprite_2d_animation_finished()
-
-
-#func _on_animated_sprite_2d_animation_finished():
-	##print($AnimatedSprite2D.play())
-	#$AnimatedSprite2D.play("idle")

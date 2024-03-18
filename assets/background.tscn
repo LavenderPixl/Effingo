@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1d14cno5qcy7"]
+
+[ext_resource type="Texture2D" uid="uid://bj0ikoxfytd5x" path="res://assets/Clouds/Clouds 1/1.png" id="1_1fb86"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1fb86")

@@ -1,28 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwmdo33jnr2y3"]
+[gd_scene load_steps=9 format=3 uid="uid://bwmdo33jnr2y3"]
 
 [ext_resource type="Script" path="res://objects/gem.gd" id="1_n6usq"]
-[ext_resource type="Texture2D" path="res://assets/Terrain/Platforms.png" id="2_j3u1r"]
 [ext_resource type="Texture2D" uid="uid://c16io7k64o2g3" path="res://assets/Terrain/Platforms2.png" id="3_cjq2d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y03l1"]
 atlas = ExtResource("3_cjq2d")
 region = Rect2(0, 51, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qamga"]
-atlas = ExtResource("2_j3u1r")
-region = Rect2(34, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5p1cc"]
-atlas = ExtResource("2_j3u1r")
-region = Rect2(51, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gfpnu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhbrt"]
 atlas = ExtResource("3_cjq2d")
-region = Rect2(34, 51, 16, 16)
+region = Rect2(0, 51, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5yyp8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hodul"]
 atlas = ExtResource("3_cjq2d")
 region = Rect2(17, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d83th"]
+atlas = ExtResource("3_cjq2d")
+region = Rect2(34, 51, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vyxvb"]
 animations = [{
@@ -36,19 +31,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qamga")
+"texture": SubResource("AtlasTexture_xhbrt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5p1cc")
+"texture": SubResource("AtlasTexture_hodul")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gfpnu")
+"texture": SubResource("AtlasTexture_d83th")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5yyp8")
+"texture": SubResource("AtlasTexture_hodul")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qamga")
+"texture": SubResource("AtlasTexture_xhbrt")
 }],
 "loop": false,
 "name": &"shine",

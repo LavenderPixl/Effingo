@@ -1,19 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://e82t6kbpilyg"]
+[gd_scene load_steps=9 format=3 uid="uid://e82t6kbpilyg"]
 
-[ext_resource type="Texture2D" uid="uid://c16io7k64o2g3" path="res://assets/Terrain/Platforms2.png" id="1_isvsc"]
+[ext_resource type="Script" path="res://objects/metalPlatform.gd" id="1_4ck37"]
+[ext_resource type="Texture2D" uid="uid://diqoyf5owdnhj" path="res://assets/Mic/Buttons.png" id="2_pesrh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxme4"]
-atlas = ExtResource("1_isvsc")
+[sub_resource type="AtlasTexture" id="AtlasTexture_56r2n"]
+atlas = ExtResource("2_pesrh")
+region = Rect2(51, 68, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dca8u"]
+atlas = ExtResource("2_pesrh")
+region = Rect2(51, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huu77"]
+atlas = ExtResource("2_pesrh")
 region = Rect2(51, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0uxb"]
+atlas = ExtResource("2_pesrh")
+region = Rect2(51, 51, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qngex"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mxme4")
+"texture": SubResource("AtlasTexture_56r2n")
 }],
 "loop": true,
-"name": &"default",
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dca8u")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huu77")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0uxb")
+}],
+"loop": true,
+"name": &"red",
 "speed": 5.0
 }]
 
@@ -22,10 +59,12 @@ size = Vector2(16, 5)
 
 [node name="MetalPlatform" type="StaticBody2D"]
 scale = Vector2(3, 3)
+script = ExtResource("1_4ck37")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_qngex")
+animation = &"blue"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2.5)

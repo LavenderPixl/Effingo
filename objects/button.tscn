@@ -306,11 +306,12 @@ size = Vector2(34, 12)
 
 [node name="Button" type="StaticBody2D"]
 script = ExtResource("1_opt77")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_hqnie")
-animation = &"blue_pressed"
+animation = &"template"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)

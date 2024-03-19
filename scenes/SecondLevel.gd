@@ -17,7 +17,7 @@ func _process(delta):
 
 func _on_blue_gem_collected():
 	var blue_max = get_tree().get_nodes_in_group("BlueGem").size()
-	$Player.score += 1	
+	$Player.score += 1
 	$HUD.setBlue($Player.score, blue_max)
 
 func _on_pink_gem_collected():

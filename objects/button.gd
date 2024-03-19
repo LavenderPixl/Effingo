@@ -18,7 +18,6 @@ func _on_button_pressable_body_entered(body):
 		return
 	pressed = true
 	btnPress.emit()
-	print(pressed)
 	platform.enable()
 
 func _set_color(color):

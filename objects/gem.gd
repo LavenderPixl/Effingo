@@ -26,7 +26,8 @@ func _on_body_entered(body):
 	if body.is_in_group("Players"):
 		gemCollected = true
 		collected.emit()
-		visible = false
+		queue_free()
+		#visible = false
 
 func _shine_anim():
 	var shine_timer = randf_range(10.0, 30.0)

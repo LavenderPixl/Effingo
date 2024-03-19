@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://e82t6kbpilyg"]
+
+[ext_resource type="Texture2D" uid="uid://c16io7k64o2g3" path="res://assets/Terrain/Platforms2.png" id="1_isvsc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxme4"]
+atlas = ExtResource("1_isvsc")
+region = Rect2(51, 17, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qngex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxme4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3fax"]
+size = Vector2(16, 5)
+
+[node name="MetalPlatform" type="StaticBody2D"]
+scale = Vector2(3, 3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_qngex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_j3fax")

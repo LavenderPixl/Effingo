@@ -158,11 +158,11 @@ radius = 6.0
 height = 12.0
 
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
-position = Vector2(200, 201)
 scale = Vector2(3, 3)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ha5gt")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iwetr")

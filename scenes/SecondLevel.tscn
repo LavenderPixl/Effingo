@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://b72ogvv8817i8"]
+[gd_scene load_steps=12 format=3 uid="uid://b72ogvv8817i8"]
 
 [ext_resource type="PackedScene" uid="uid://b1d14cno5qcy7" path="res://background.tscn" id="1_i837w"]
+[ext_resource type="Script" path="res://scenes/SecondLevel.gd" id="1_nway6"]
 [ext_resource type="Texture2D" uid="uid://dlw04gqykmxb4" path="res://assets/Clouds/Clouds 2/1.png" id="2_xtwkn"]
 [ext_resource type="TileSet" uid="uid://blj0g7hfhntgr" path="res://scenes/Tilemap.tres" id="3_628y2"]
-[ext_resource type="PackedScene" uid="uid://37muyfg4on0f" path="res://player2.tscn" id="4_rar7x"]
-[ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://player.tscn" id="5_7yb2r"]
+[ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="5_7yb2r"]
+[ext_resource type="PackedScene" uid="uid://5ntvaej8g1ix" path="res://objects/button.tscn" id="5_okro4"]
+[ext_resource type="PackedScene" uid="uid://37muyfg4on0f" path="res://objects/player2.tscn" id="6_y1nu7"]
+[ext_resource type="PackedScene" uid="uid://brgi1iv7an7nc" path="res://scenes/hud.tscn" id="8_tx8xr"]
+[ext_resource type="PackedScene" uid="uid://bwmdo33jnr2y3" path="res://objects/blueGem.tscn" id="9_xyjo5"]
+[ext_resource type="PackedScene" uid="uid://5v5v0y6w2p3v" path="res://objects/pinkGem.tscn" id="10_ct2ri"]
+[ext_resource type="PackedScene" uid="uid://e82t6kbpilyg" path="res://objects/metalPlatform.tscn" id="11_5fyjt"]
 
 [node name="SecondLevel" type="Node"]
+script = ExtResource("1_nway6")
 
 [node name="TextureRect" parent="." instance=ExtResource("1_i837w")]
 anchors_preset = -1
@@ -32,8 +39,26 @@ layer_1/tile_data = PackedInt32Array(720931, 393216, 4, 720932, 655360, 5, 58986
 layer_2/name = "Platforms (Extra)"
 layer_2/tile_data = PackedInt32Array(1048611, 1179648, 1342177282, 983075, 1179648, 1342177282, 1179683, 1179648, 1342177282, 1114147, 1179648, 1342177282, 917539, 1179648, 1342177282, 852003, 1179648, 1342177282, 1048612, 1179648, 1, 1048613, 1179648, 1, 1048614, 1179648, 1, 1048615, 1179648, 1)
 
-[node name="Player" parent="." instance=ExtResource("4_rar7x")]
-position = Vector2(50, 889)
+[node name="Button" parent="." instance=ExtResource("5_okro4")]
+position = Vector2(528, 888)
 
-[node name="Player2" parent="." instance=ExtResource("5_7yb2r")]
-position = Vector2(101, 889)
+[node name="Player" parent="." instance=ExtResource("5_7yb2r")]
+position = Vector2(42, 888)
+
+[node name="Player2" parent="." instance=ExtResource("6_y1nu7")]
+position = Vector2(116, 888)
+
+[node name="HUD" parent="." instance=ExtResource("8_tx8xr")]
+
+[node name="BlueGem" parent="." instance=ExtResource("9_xyjo5")]
+position = Vector2(214, 769)
+
+[node name="PinkGem" parent="." instance=ExtResource("10_ct2ri")]
+position = Vector2(496, 560)
+
+[node name="MetalPlatform" parent="." instance=ExtResource("11_5fyjt")]
+position = Vector2(672, 840)
+
+[connection signal="btnPress" from="Button" to="." method="_on_button_btn_press"]
+[connection signal="collected" from="BlueGem" to="." method="_on_blue_gem_collected"]
+[connection signal="collected" from="PinkGem" to="." method="_on_pink_gem_collected"]

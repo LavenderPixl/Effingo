@@ -11,7 +11,8 @@ func _ready():
 
 func _process(delta):
 	if shine_cooldown == 0:
-		if randi_range(0, 5000) == 382:
+		#$AnimatedSprite2D.play("idle")
+		if randi_range(0, 4000) == 382:
 			$AnimatedSprite2D.play("shine")
 			shine_cooldown = 1
 	else:
@@ -19,11 +20,12 @@ func _process(delta):
 			shine_cooldown -= delta
 		else:
 			shine_cooldown = 0
+	
 
 func _on_body_entered(body):
 	if body.is_in_group("Players"):
 		gemCollected = true
-		collected.emit(gemCollected)
+		collected.emit()
 		visible = false
 
 func _shine_anim():

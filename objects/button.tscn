@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ntvaej8g1ix"]
+[gd_scene load_steps=9 format=3 uid="uid://5ntvaej8g1ix"]
 
 [ext_resource type="Texture2D" uid="uid://c16io7k64o2g3" path="res://assets/Terrain/Platforms2.png" id="1_8fkic"]
 [ext_resource type="Script" path="res://objects/button.gd" id="1_opt77"]
+[ext_resource type="Script" path="res://objects/ButtonPressable.gd" id="3_gjsgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75kbk"]
 atlas = ExtResource("1_8fkic")
@@ -34,21 +35,25 @@ animations = [{
 size = Vector2(48, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wfeav"]
-size = Vector2(36, 12)
+size = Vector2(34, 12)
 
-[node name="Button" type="Area2D"]
+[node name="Button" type="StaticBody2D"]
 script = ExtResource("1_opt77")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_hqnie")
-animation = &"pressed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_vfmpa")
 
-[node name="CollisionPress" type="CollisionShape2D" parent="."]
+[node name="ButtonPressable" type="Area2D" parent="."]
+script = ExtResource("3_gjsgg")
+
+[node name="CollisionPress" type="CollisionShape2D" parent="ButtonPressable"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_wfeav")
 debug_color = Color(0.698039, 0.407843, 0.721569, 0.419608)
+
+[connection signal="body_entered" from="ButtonPressable" to="." method="_on_button_pressable_body_entered"]

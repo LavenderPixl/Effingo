@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://4ghnnfab48gh"]
+
+[ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_0wltd"]
+[ext_resource type="PackedScene" uid="uid://c4cn1g0fhc6lh" path="res://scenes/Main.tscn" id="2_jsge0"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_0wltd")
+player_scene = ExtResource("2_jsge0")
+
+[node name="host" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="join" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://objects/player2.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]

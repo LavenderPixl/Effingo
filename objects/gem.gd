@@ -27,7 +27,6 @@ func _on_body_entered(body):
 		gemCollected = true
 		collected.emit()
 		queue_free()
-		#visible = false
 
 func _shine_anim():
 	var shine_timer = randf_range(10.0, 30.0)

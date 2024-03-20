@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-@export var playerId: int = 1
+@export var playerId: int
 @export var speed = 300
-#@export var gravity = 8
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var isRight : bool = true
 @export var score = 0
+@export var set_color : String
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var screen_size
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +15,24 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.flip_h = isRight
+	if set_color == "blue":
+		playerId == 1
+	elif set_color == "pink":
+		playerId == 2
 	
+	if playerId == 1:
+		set_collision_layer_value(1, true)
+		set_collision_layer_value(2, true)
+		
+		set_collision_mask_value(1, true)
+		set_collision_mask_value(2, true)
+	elif playerId == 2:
+		set_collision_layer_value(1, true)
+		set_collision_layer_value(3, true)
+		
+		set_collision_mask_value(1, true)
+		set_collision_mask_value(3, true)
+
 func _physics_process(delta):
 	#print(Engine.get_frames_per_second())
 	var input_prefix = "pl" + str(playerId) + "_"
@@ -24,7 +41,7 @@ func _physics_process(delta):
 		velocity.y += (gravity * delta) * 2
 		
 	if is_on_floor() and velocity.x == 0:
-		$AnimatedSprite2D.play("idle")
+		$AnimatedSprite2D.play("%s_idle" %[set_color])
 	
 	velocity.x = 0
 	if Input.is_action_pressed("close_game"):
@@ -32,19 +49,19 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed(input_prefix + "move_right"):
 		velocity.x = speed
-		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.animation = "%s_walk" %[set_color]
 		$AnimatedSprite2D.flip_h = true
 
 	if Input.is_action_pressed(input_prefix + "move_left"):
 		velocity.x =  -speed
-		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.animation = "%s_walk" %[set_color]
 		$AnimatedSprite2D.flip_h = false
 	
 	if Input.is_action_just_pressed(input_prefix + "jump") and is_on_floor():
 		velocity.y -= 700
-		$AnimatedSprite2D.play("jump")
+		$AnimatedSprite2D.play("%s_jump" %[set_color])
 		
 	if velocity.y > 0 and $AnimatedSprite2D.animation != "fall":
-		$AnimatedSprite2D.play("fall")
+		$AnimatedSprite2D.play("%s_fall" %[set_color])
 		
 	move_and_slide()

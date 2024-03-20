@@ -70,9 +70,17 @@ message = "Pink, I'm over here!"
 position = Vector2(1296, 104)
 
 [node name="Player" parent="." instance=ExtResource("6_r02cb")]
-position = Vector2(64, 887)
+position = Vector2(56, 888)
+playerId = 1
+set_color = "blue"
 
-[node name="Player2" parent="." instance=ExtResource("7_2bgtf")]
+[node name="Player2" parent="." instance=ExtResource("6_r02cb")]
+position = Vector2(104, 888)
+playerId = 2
+set_color = "pink"
+
+[node name="Player3" parent="." instance=ExtResource("7_2bgtf")]
+visible = false
 position = Vector2(110, 888)
 
 [node name="HUD" parent="." instance=ExtResource("8_3u02g")]

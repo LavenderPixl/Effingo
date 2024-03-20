@@ -98,6 +98,5 @@ position = Vector2(1392, 392)
 distance = 10
 set_color = "red"
 
-[connection signal="btnPress" from="Button" to="." method="_on_button_btn_press"]
 [connection signal="collected" from="BlueGem" to="." method="_on_blue_gem_collected"]
 [connection signal="collected" from="PinkGem" to="." method="_on_pink_gem_collected"]

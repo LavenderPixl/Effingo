@@ -27,14 +27,24 @@ func _on_pink_gem_collected():
 	$HUD.setPink($Player2.score, pink_max)
 
 func _on_area_2d_body_entered(body):
-	if body == $Player2 and $Player2.score == pink_max:
+	if body == $Player2:
 		pink_done = true
 		if blue_done and pink_done:
 			_finished()
-	if body == $Player and $Player.score == blue_max:
+	if body == $Player:
 		blue_done = true
 		if blue_done and pink_done:
 			_finished()
+
+#func _on_area_2d_body_entered(body):
+	#if body == $Player2 and $Player2.score == pink_max:
+		#pink_done = true
+		#if blue_done and pink_done:
+			#_finished()
+	#if body == $Player and $Player.score == blue_max:
+		#blue_done = true
+		#if blue_done and pink_done:
+			#_finished()
 
 func _on_area_2d_body_exited(body):
 	if body == $Player2:

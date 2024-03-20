@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="5_7yb2r"]
 [ext_resource type="PackedScene" uid="uid://5ntvaej8g1ix" path="res://objects/button.tscn" id="5_okro4"]
 [ext_resource type="PackedScene" uid="uid://brgi1iv7an7nc" path="res://scenes/hud.tscn" id="8_tx8xr"]
-[ext_resource type="PackedScene" uid="uid://bwmdo33jnr2y3" path="res://objects/blueGem.tscn" id="9_xyjo5"]
+[ext_resource type="PackedScene" uid="uid://bwmdo33jnr2y3" path="res://objects/gem.tscn" id="9_xyjo5"]
 [ext_resource type="PackedScene" uid="uid://5v5v0y6w2p3v" path="res://objects/pinkGem.tscn" id="10_ct2ri"]
 [ext_resource type="PackedScene" uid="uid://e82t6kbpilyg" path="res://objects/metalPlatform.tscn" id="11_5fyjt"]
 
@@ -75,13 +75,10 @@ set_color = "green"
 
 [node name="Player" parent="." instance=ExtResource("5_7yb2r")]
 position = Vector2(42, 888)
-playerId = 1
-set_color = "blue"
 
 [node name="Player2" parent="." instance=ExtResource("5_7yb2r")]
 position = Vector2(104, 888)
-playerId = 2
-set_color = "pink"
+color = 1
 
 [node name="HUD" parent="." instance=ExtResource("8_tx8xr")]
 
@@ -90,6 +87,7 @@ position = Vector2(168, 592)
 
 [node name="PinkGem" parent="." instance=ExtResource("10_ct2ri")]
 position = Vector2(104, 544)
+color = 1
 
 [node name="greenPlatform" parent="." instance=ExtResource("11_5fyjt")]
 position = Vector2(232, 832)

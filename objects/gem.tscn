@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://bwmdo33jnr2y3"]
+
+[ext_resource type="Script" path="res://objects/gem.gd" id="1_ojjjh"]
+[ext_resource type="Texture2D" uid="uid://c16io7k64o2g3" path="res://assets/Terrain/Platforms2.png" id="2_2g2wk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y03l1"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(0, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhbrt"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(0, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hodul"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(17, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d83th"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(34, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds5fg"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(0, 68, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osnso"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(0, 68, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p225s"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(17, 68, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aat2s"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(34, 68, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfqba"]
+atlas = ExtResource("2_2g2wk")
+region = Rect2(17, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vyxvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y03l1")
+}],
+"loop": true,
+"name": &"blue_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhbrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hodul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d83th")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hodul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhbrt")
+}],
+"loop": false,
+"name": &"blue_shine",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds5fg")
+}],
+"loop": true,
+"name": &"pink_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osnso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p225s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aat2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfqba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osnso")
+}],
+"loop": false,
+"name": &"pink_shine",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yncq6"]
+radius = 12.0
+height = 44.0
+
+[node name="Gem" type="Area2D" groups=["Gem"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ojjjh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_vyxvb")
+animation = &"pink_shine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_yncq6")
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -72.0
+offset_right = 98.0
+offset_bottom = -40.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

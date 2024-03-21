@@ -4,11 +4,18 @@
 [ext_resource type="Script" path="res://scenes/FirstLevel.gd" id="1_yx44f"]
 [ext_resource type="TileSet" uid="uid://blj0g7hfhntgr" path="res://scenes/Tilemap.tres" id="3_w0shj"]
 [ext_resource type="PackedScene" uid="uid://bwmdo33jnr2y3" path="res://objects/gem.tscn" id="4_1jxcm"]
-[ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="6_r02cb"]
 [ext_resource type="PackedScene" uid="uid://brgi1iv7an7nc" path="res://scenes/hud.tscn" id="8_3u02g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yin7d"]
 size = Vector2(103, 116)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_544n1"]
+properties/0/path = NodePath(".:blue_collected")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:pink_collected")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource("1_yx44f")
@@ -60,24 +67,17 @@ message = "Only Blue can collect me!"
 position = Vector2(1536, 872)
 
 [node name="PinkGem" parent="." groups=["PinkGem"] instance=ExtResource("4_1jxcm")]
-position = Vector2(88, 288)
+position = Vector2(488, 744)
 collision_layer = 4
 collision_mask = 4
 message = "Pink, Over here!"
-color = 1
+color = 2
 
 [node name="PinkGem2" parent="." groups=["PinkGem"] instance=ExtResource("4_1jxcm")]
 position = Vector2(1296, 112)
 collision_layer = 4
 collision_mask = 4
-color = 1
-
-[node name="Player" parent="." instance=ExtResource("6_r02cb")]
-position = Vector2(56, 888)
-
-[node name="Player2" parent="." instance=ExtResource("6_r02cb")]
-position = Vector2(104, 888)
-color = 1
+color = 2
 
 [node name="HUD" parent="." instance=ExtResource("8_3u02g")]
 
@@ -86,6 +86,12 @@ color = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1851.5, 854)
 shape = SubResource("RectangleShape2D_yin7d")
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(112, 880)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_544n1")
 
 [connection signal="collected" from="BlueGem" to="." method="_on_blue_gem_collected"]
 [connection signal="collected" from="BlueGem2" to="." method="_on_blue_gem_collected"]

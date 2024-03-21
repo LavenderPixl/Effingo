@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var message: String = ""
-@export var color: Globals.COLOR
+@export var color: Globals.COLOR = Globals.COLOR.BLUE
 var gemCollected = false
 var shine_cooldown = 0
 signal collected(gemCollected)
@@ -26,10 +26,15 @@ func _process(delta):
 			shine_cooldown = 0
 
 func _on_body_entered(body):
+	
 	if body.is_in_group("Players"):
-		gemCollected = true
-		collected.emit()
-		queue_free()
+		collect_gem.rpc()
+@rpc("any_peer","call_local")
+func collect_gem():
+	print(1)
+	gemCollected = true
+	collected.emit()
+	queue_free()
 
 func _shine_anim():
 	var shine_timer = randf_range(10.0, 30.0)

@@ -1,18 +1,15 @@
 extends Node2D
 var blue_done : bool = false
+@export var blue_collected = 0
 var blue_max
 var pink_done : bool = false
+@export var pink_collected = 0
 var pink_max
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	blue_max = count_gems(Globals.COLOR.BLUE)
-	$HUD.setBlue($Player.score, blue_max)
-	
 	pink_max = count_gems(Globals.COLOR.PINK)
-	$HUD.setPink($Player2.score, pink_max)
-
 
 func count_gems(color: Globals.COLOR) -> int:
 	var gems = get_tree().get_nodes_in_group("Gem")
@@ -24,30 +21,32 @@ func count_gems(color: Globals.COLOR) -> int:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$HUD.setBlue(blue_collected, blue_max)
+	$HUD.setPink(pink_collected, pink_max)
 
 func _on_blue_gem_collected():
-	$Player.score += 1
-	$HUD.setBlue($Player.score, blue_max)
+	blue_collected += 1
 
 func _on_pink_gem_collected():
-	$Player2.score += 1
-	$HUD.setPink($Player2.score, pink_max)
+	pink_collected += 1
 
 func _on_area_2d_body_entered(body):
-	if body == $Player2:
-		pink_done = true
-		if blue_done and pink_done:
-			_finished()
-	if body == $Player:
+	if not body is Player:
+		return
+	if body.color == Globals.COLOR.BLUE:
 		blue_done = true
-		if blue_done and pink_done:
-			_finished()
+	if body.color == Globals.COLOR.PINK:
+		pink_done = true
+		
+	if blue_done and pink_done:
+		_finished()
 
 func _on_area_2d_body_exited(body):
-	if body == $Player2:
+	if not body is Player:
+		return
+	if body.color == Globals.COLOR.PINK:
 		pink_done = false
-	if body == $Player:
+	if body.color == Globals.COLOR.BLUE:
 		blue_done = false
 
 func _finished():

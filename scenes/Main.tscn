@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bel323cbjjcwe"]
+[gd_scene load_steps=5 format=3 uid="uid://bel323cbjjcwe"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_76fbu"]
 [ext_resource type="PackedScene" uid="uid://dina4nswdc6uj" path="res://scenes/FirstLevel.tscn" id="1_m1mod"]
+[ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="2_hwt2h"]
+[ext_resource type="PackedScene" uid="uid://big30c8gdrxoa" path="res://scenes/MainMenu.tscn" id="2_v8d3s"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_76fbu")
+player_scene = ExtResource("2_hwt2h")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_v8d3s")]
 
 [node name="FirstLevel" parent="." instance=ExtResource("1_m1mod")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://objects/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="host_pressed" from="MainMenu" to="." method="_on_main_menu_host_pressed"]
+[connection signal="join_pressed" from="MainMenu" to="." method="_on_main_menu_join_pressed"]

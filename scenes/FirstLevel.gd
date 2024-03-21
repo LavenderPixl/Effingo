@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 var blue_done : bool = false
 var blue_max
 var pink_done : bool = false

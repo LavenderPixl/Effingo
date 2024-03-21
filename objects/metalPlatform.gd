@@ -19,6 +19,7 @@ func _process(delta):
 	if not enabled and position != disabled_position:
 		position.y += 0.2
 
+
 func _set_color(color):
 	$AnimatedSprite2D.play("%s" %[color])
 

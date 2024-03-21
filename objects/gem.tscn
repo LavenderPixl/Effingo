@@ -110,7 +110,7 @@ script = ExtResource("1_ojjjh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_vyxvb")
-animation = &"pink_shine"
+animation = &"blue_shine"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yncq6")

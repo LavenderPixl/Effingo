@@ -322,6 +322,8 @@ properties/4/spawn = true
 properties/4/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
+top_level = true
+visibility_layer = 524288
 scale = Vector2(3, 3)
 script = ExtResource("1_ha5gt")
 

@@ -2,8 +2,10 @@ extends Area2D
 
 @export var message: String = ""
 @export var color: Globals.COLOR = Globals.COLOR.BLUE
+
 var gemCollected = false
 var shine_cooldown = 0
+
 signal collected(gemCollected)
 
 func _ready():
@@ -28,7 +30,10 @@ func _process(delta):
 func _on_body_entered(body):
 	
 	if body.is_in_group("Players"):
-		collect_gem.rpc()
+		if multiplayer.multiplayer_peer == null:
+			collect_gem()
+		else:
+			collect_gem.rpc()
 @rpc("any_peer","call_local")
 func collect_gem():
 	print(1)

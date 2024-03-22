@@ -1,9 +1,12 @@
 extends StaticBody2D
+
+@export var distance : int
+@export var move_speed : float = 0.5
+@export var set_color : String
+
 var disabled_position : Vector2
 var enabled_position : Vector2
-@export var distance : int
 var enabled : bool
-@export var set_color : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,9 +18,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if enabled and position.distance_to(enabled_position) > 0.1:
-		position.y -= 0.2
+		position.y -= move_speed
 	if not enabled and position != disabled_position:
-		position.y += 0.2
+		position.y += move_speed
 
 
 func _set_color(color):

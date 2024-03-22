@@ -1,7 +1,9 @@
 extends StaticBody2D
+
 @export var pressed : bool = false
 @export var platform : Node2D
 @export var set_color : String
+
 signal btnPress
 
 # Called when the node enters the scene tree for the first time.
@@ -12,19 +14,19 @@ func _ready():
 func _process(delta):
 	pass
 
+func _set_color(color):
+	$AnimatedSprite2D.play("%s_idle" %[color])
 
 func _on_button_pressable_body_entered(body):
 	if not body.is_in_group("Players"):
 		return
+	$AnimatedSprite2D.play("%s_pressed" %[set_color])
 	pressed = true
 	btnPress.emit()
 	platform.enable()
 
-func _set_color(color):
-	$AnimatedSprite2D.play("%s_idle" %[color])
-
-
 func _on_button_pressable_body_exited(body):
 	if not body.is_in_group("Players"):
 		return
+	$AnimatedSprite2D.play("%s_idle" %[set_color])	
 	platform.disable()

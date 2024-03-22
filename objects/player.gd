@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name Player
+
 @export var playerId: int
 @export var speed = 300
 @export var isRight : bool = true
@@ -42,7 +43,7 @@ func _physics_process(delta):
 		return;
 		
 	$AnimatedSprite2D.flip_h = isRight
-	if not is_multiplayer_authority():
+	if multiplayer.multiplayer_peer != null and not is_multiplayer_authority():
 		$AnimatedSprite2D.play(animation)
 		return
 	
@@ -83,9 +84,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _enter_tree():
-	set_multiplayer_authority(name.to_int())
+	if multiplayer.multiplayer_peer:
+		set_multiplayer_authority(name.to_int())
 	var papa = get_parent();
 	if is_multiplayer_authority():
 		playerId = get_parent().playerId
+	if is_multiplayer_authority() or multiplayer.multiplayer_peer == null:
 		color = Globals.color_to_enum(playerId)
-		position = get_tree().current_scene.find_child("Spawn").position
+		if playerId == 1:
+			position = get_tree().get_first_node_in_group("spawn_blue").position
+		else:
+			position = get_tree().get_first_node_in_group("spawn_pink").position

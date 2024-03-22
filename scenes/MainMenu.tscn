@@ -1,23 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://big30c8gdrxoa"]
+[gd_scene load_steps=6 format=3 uid="uid://big30c8gdrxoa"]
 
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_0wltd"]
+[ext_resource type="Texture2D" uid="uid://df46c5clg2nhy" path="res://assets/Clouds/Clouds 7/1.png" id="2_2c5it"]
+[ext_resource type="Texture2D" uid="uid://r51ve30a4mdk" path="res://assets/Clouds/Clouds 7/2.png" id="3_33kbm"]
+[ext_resource type="Texture2D" uid="uid://bsoj62b6diasw" path="res://assets/Clouds/Clouds 7/3.png" id="4_8rltw"]
+[ext_resource type="Texture2D" uid="uid://cfky5kosjv36r" path="res://assets/Clouds/Clouds 7/4.png" id="5_q5a7y"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_0wltd")
 
+[node name="background" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_2c5it")
+
+[node name="extra" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_33kbm")
+
+[node name="clouds" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_8rltw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_q5a7y")
+
 [node name="host" type="Button" parent="."]
-offset_left = 112.0
-offset_top = 16.0
-offset_right = 163.0
-offset_bottom = 47.0
-text = "HOST"
+custom_minimum_size = Vector2(200, 0)
+offset_left = 823.0
+offset_top = 505.0
+offset_right = 1023.0
+offset_bottom = 536.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Host"
 
 [node name="join" type="Button" parent="."]
-offset_left = 112.0
-offset_top = 72.0
-offset_right = 155.0
-offset_bottom = 103.0
-text = "JOIN"
+custom_minimum_size = Vector2(200, 0)
+offset_left = 823.0
+offset_top = 545.0
+offset_right = 1023.0
+offset_bottom = 576.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Join"
+
+[node name="couchcoop" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 823.0
+offset_top = 417.0
+offset_right = 1023.0
+offset_bottom = 448.0
+size_flags_horizontal = 4
+text = "Local Co-op"
+
+[node name="quit_game" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 823.0
+offset_top = 633.0
+offset_right = 1023.0
+offset_bottom = 669.0
+theme_override_font_sizes/font_size = 20
+text = "Quit Game"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 720.0
+offset_top = 736.0
+offset_right = 1128.0
+offset_bottom = 776.0
+placeholder_text = "IP"
 
 [connection signal="pressed" from="host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="couchcoop" to="." method="_on_couchcoop_pressed"]
+[connection signal="pressed" from="quit_game" to="." method="_on_quit_game_pressed"]

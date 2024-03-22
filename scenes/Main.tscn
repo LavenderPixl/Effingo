@@ -1,21 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bel323cbjjcwe"]
+[gd_scene load_steps=7 format=3 uid="uid://bel323cbjjcwe"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_76fbu"]
-[ext_resource type="PackedScene" uid="uid://dina4nswdc6uj" path="res://scenes/FirstLevel.tscn" id="1_m1mod"]
+[ext_resource type="PackedScene" uid="uid://dina4nswdc6uj" path="res://scenes/Level1.tscn" id="1_m1mod"]
 [ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="2_hwt2h"]
 [ext_resource type="PackedScene" uid="uid://big30c8gdrxoa" path="res://scenes/MainMenu.tscn" id="2_v8d3s"]
+[ext_resource type="PackedScene" uid="uid://b72ogvv8817i8" path="res://scenes/Level2.tscn" id="5_wb22v"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p45qf"]
+properties/0/path = NodePath(".:current_level")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Main" type="Node"]
 script = ExtResource("1_76fbu")
 player_scene = ExtResource("2_hwt2h")
+levels = Array[PackedScene]([ExtResource("1_m1mod"), ExtResource("5_wb22v")])
 
 [node name="MainMenu" parent="." instance=ExtResource("2_v8d3s")]
-
-[node name="FirstLevel" parent="." instance=ExtResource("1_m1mod")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://objects/player.tscn")
 spawn_path = NodePath("..")
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_p45qf")
+
+[connection signal="coop" from="MainMenu" to="." method="_on_main_menu_coop"]
 [connection signal="host_pressed" from="MainMenu" to="." method="_on_main_menu_host_pressed"]
 [connection signal="join_pressed" from="MainMenu" to="." method="_on_main_menu_join_pressed"]

@@ -1,27 +1,39 @@
-[gd_scene load_steps=11 format=3 uid="uid://b72ogvv8817i8"]
+[gd_scene load_steps=12 format=3 uid="uid://b72ogvv8817i8"]
 
 [ext_resource type="PackedScene" uid="uid://b1d14cno5qcy7" path="res://background.tscn" id="1_i837w"]
-[ext_resource type="Script" path="res://scenes/SecondLevel.gd" id="1_nway6"]
+[ext_resource type="Script" path="res://scenes/Level1.gd" id="1_kgqjh"]
 [ext_resource type="Texture2D" uid="uid://dlw04gqykmxb4" path="res://assets/Clouds/Clouds 2/1.png" id="2_xtwkn"]
 [ext_resource type="TileSet" uid="uid://blj0g7hfhntgr" path="res://scenes/Tilemap.tres" id="3_628y2"]
-[ext_resource type="PackedScene" uid="uid://7w1iwkujno11" path="res://objects/player.tscn" id="5_7yb2r"]
 [ext_resource type="PackedScene" uid="uid://5ntvaej8g1ix" path="res://objects/button.tscn" id="5_okro4"]
 [ext_resource type="PackedScene" uid="uid://brgi1iv7an7nc" path="res://scenes/hud.tscn" id="8_tx8xr"]
 [ext_resource type="PackedScene" uid="uid://bwmdo33jnr2y3" path="res://objects/gem.tscn" id="9_xyjo5"]
 [ext_resource type="PackedScene" uid="uid://5v5v0y6w2p3v" path="res://objects/pinkGem.tscn" id="10_ct2ri"]
 [ext_resource type="PackedScene" uid="uid://e82t6kbpilyg" path="res://objects/metalPlatform.tscn" id="11_5fyjt"]
 
-[node name="SecondLevel" type="Node"]
-script = ExtResource("1_nway6")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aedbi"]
+size = Vector2(103, 116)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6s0py"]
+properties/0/path = NodePath(".:blue_collected")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:pink_collected")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Level2" type="Node2D" groups=["level"]]
+z_index = -1
+script = ExtResource("1_kgqjh")
 
 [node name="TextureRect" parent="." instance=ExtResource("1_i837w")]
 anchors_preset = -1
 anchor_left = 0.001
 anchor_right = 1.0
 anchor_bottom = 1.019
-offset_left = -0.92
-offset_right = -8.0
-offset_bottom = -20.52
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_xtwkn")
@@ -64,7 +76,7 @@ platform = NodePath("../redPlatform")
 set_color = "red"
 
 [node name="Button4" parent="." node_paths=PackedStringArray("platform") instance=ExtResource("5_okro4")]
-position = Vector2(328, 888)
+position = Vector2(776, 648)
 platform = NodePath("../redPlatform")
 set_color = "red"
 
@@ -73,13 +85,6 @@ position = Vector2(40, 552)
 platform = NodePath("../greenPlatform")
 set_color = "green"
 
-[node name="Player" parent="." instance=ExtResource("5_7yb2r")]
-position = Vector2(42, 888)
-
-[node name="Player2" parent="." instance=ExtResource("5_7yb2r")]
-position = Vector2(104, 888)
-color = 1
-
 [node name="HUD" parent="." instance=ExtResource("8_tx8xr")]
 
 [node name="BlueGem" parent="." instance=ExtResource("9_xyjo5")]
@@ -87,16 +92,34 @@ position = Vector2(168, 592)
 
 [node name="PinkGem" parent="." instance=ExtResource("10_ct2ri")]
 position = Vector2(104, 544)
+color = 2
 
 [node name="greenPlatform" parent="." instance=ExtResource("11_5fyjt")]
 position = Vector2(232, 832)
-distance = 100
+distance = 200
 set_color = "green"
 
 [node name="redPlatform" parent="." instance=ExtResource("11_5fyjt")]
-position = Vector2(1392, 392)
-distance = -200
+position = Vector2(1376, 800)
+distance = 350
 set_color = "red"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1856, 376)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_aedbi")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6s0py")
+
+[node name="SpawnBlue" type="Marker2D" parent="." groups=["spawn_blue"]]
+position = Vector2(66, 866)
+
+[node name="SpawnPink" type="Marker2D" parent="." groups=["spawn_pink"]]
+position = Vector2(194, 866)
 
 [connection signal="collected" from="BlueGem" to="." method="_on_blue_gem_collected"]
 [connection signal="collected" from="PinkGem" to="." method="_on_pink_gem_collected"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

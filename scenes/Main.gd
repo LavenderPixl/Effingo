@@ -19,7 +19,7 @@ func _add_player(id = 1):
 
 func _ready():
 	$MainMenu.visible = true
-	
+
 func next_level():
 	var level = get_tree().get_first_node_in_group("level")
 	if level:

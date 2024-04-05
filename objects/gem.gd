@@ -18,7 +18,7 @@ func get_color(color) -> String:
 func _process(delta):
 	if shine_cooldown == 0:
 		#$AnimatedSprite2D.play("idle")
-		if randi_range(0, 4000) == 382:
+		if randi_range(0, 3500) == 382:
 			$AnimatedSprite2D.play("%s_shine" %[get_color(color)])
 			shine_cooldown = 1
 	else:

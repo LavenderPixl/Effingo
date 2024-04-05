@@ -13,6 +13,9 @@ signal level_complete
 func _ready():
 	blue_max = count_gems(Globals.COLOR.BLUE)
 	pink_max = count_gems(Globals.COLOR.PINK)
+	
+	$HUD.setBlue(blue_collected, blue_max)
+	$HUD.setPink(pink_collected, pink_max)
 
 func count_gems(color: Globals.COLOR) -> int:
 	var gems = get_tree().get_nodes_in_group("Gem")
@@ -23,9 +26,8 @@ func count_gems(color: Globals.COLOR) -> int:
 	return count
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
-	$HUD.setBlue(blue_collected, blue_max)
-	$HUD.setPink(pink_collected, pink_max)
+func _process(delta):
+	pass
 
 func _on_blue_gem_collected():
 	blue_collected += 1

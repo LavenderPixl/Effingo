@@ -8,12 +8,13 @@ var peer = ENetMultiplayerPeer.new()
 var playerId = 0
 
 func _add_player(id = 1):
+	playerId = id
+	
 	var player = player_scene.instantiate()
+	
 	player.name = str(id)
-	if id == 1:
-		player.playerId = 1
-	elif id == 2:
-		player.playerId = 2
+	player.playerId = id
+	
 	call_deferred("add_child", player)
 
 func _ready():
@@ -23,25 +24,24 @@ func next_level():
 	var level = get_tree().get_first_node_in_group("level")
 	if level:
 		level.queue_free() 
-		
+	
 	level = levels[current_level].instantiate()
 	level.connect("level_complete", next_level)
+	
 	current_level += 1
 	
 	add_child(level)
 	#Move players
 	var players = get_tree().get_nodes_in_group("Players")
 	for player in players:
+		var spawn_point = "spawn_blue" if player.playerId == 1 else "spawn_pink"
+		
 		if player.is_multiplayer_authority() or multiplayer.multiplayer_peer == null:
 			player.color = Globals.color_to_enum(player.playerId)
-			if playerId == 1:
-				
-				player.global_position = get_tree().get_nodes_in_group("spawn_blue")[1].global_position
-				player.velocity = Vector2.ZERO
-			else:
-				player.global_position = get_tree().get_nodes_in_group("spawn_pink")[1].global_position
-				player.velocity = Vector2.ZERO
-
+			
+			player.global_position = get_tree().get_first_node_in_group(spawn_point).global_position
+			player.velocity = Vector2.ZERO
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

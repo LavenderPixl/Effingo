@@ -91,7 +91,8 @@ func _enter_tree():
 		playerId = get_parent().playerId
 	if is_multiplayer_authority() or multiplayer.multiplayer_peer == null:
 		color = Globals.color_to_enum(playerId)
-		if playerId == 1:
-			position = get_tree().get_first_node_in_group("spawn_blue").position
-		else:
-			position = get_tree().get_first_node_in_group("spawn_pink").position
+		
+		var spawn_point = "spawn_blue" if playerId == 1 else "spawn_pink"
+		
+		position = get_tree().get_first_node_in_group(spawn_point).position
+		
